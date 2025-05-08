@@ -66,7 +66,6 @@ const paginatedHistory = computed(() => {
   return history.value.slice((pagination.value - 1) * 5, pagination.value * 5);
 });
 
-
 function submit() {
   if (text.value !== "" && amount.value !== null) {
     history.value.push({ text: text.value.trimStart(), amount: amount.value });
@@ -100,9 +99,9 @@ watch([text, amount], ([newText, newAmount]: [string, number | null]) => {
 </script>
 
 <template>
-  <div class="flex justify-center items-center h-screen w-screen">
+  <div class="flex justify-center items-center w-full">
     <section
-      class="bg-indigo-900 h-[34rem] w-72 rounded-2xl font-mono text-cyan-100 py-2"
+      class="bg-indigo-900 w-72 rounded-2xl font-mono text-cyan-100 py-2"
     >
       <div class="text-center">
         <div class="capitalize font-extrabold text-xl">expense tracker</div>
@@ -111,7 +110,7 @@ watch([text, amount], ([newText, newAmount]: [string, number | null]) => {
           <span class="text-3xl leading-5">${{ income + expense }}</span>
         </div>
         <div
-          class="flex justify-center shadow-2xl bg-indigo-700 h-16 w-3/4 rounded-lg mx-auto my-3 uppercase"
+          class="flex justify-center shadow-2xl bg-indigo-700 h-12 w-3/4 rounded-lg mx-auto my-2 uppercase"
         >
           <div class="flex flex-col justify-center w-[45%] h-full">
             <span>income</span

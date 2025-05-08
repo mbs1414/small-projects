@@ -1,3 +1,4 @@
 <template>
-  <shit />
+  <NuxtLayout/>
+    <NuxtPage />
 </template>
