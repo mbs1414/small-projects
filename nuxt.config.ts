@@ -9,5 +9,25 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
-  modules: ["nuxt-quasar-ui"],
+  modules: ["nuxt-quasar-ui", "@vesp/nuxt-fontawesome"],
+  fontawesome: {
+    icons: {
+      solid: ['sort-up'],
+      regular: ['comment' ],
+      brands: ['twitter' ],
+    },
+    proIcons: {
+      solid: [],
+      regular: [],
+      light: [],
+      thin: [],
+      duotone: [],
+    },
+    sharpIcons: {
+      solid: [], 
+      regular: [],
+      light: [],
+      thin: [],
+    }
+  }
 });

@@ -236,6 +236,6 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 .q-field--outlined .q-field__control::before {
-  border: 1px solid burlywood;
+  border: 1px solid white;
 }
 </style>
