@@ -10,57 +10,7 @@ interface History {
   text: string;
   amount: number;
 }
-const history = ref<History[]>([
-  { text: "fruits", amount: 1000 },
-  { text: "vegetables", amount: 1200 },
-  { text: "meat", amount: 2500 },
-  { text: "dairy", amount: 1500 },
-  { text: "bakery", amount: 800 },
-  { text: "snacks", amount: 500 },
-  { text: "beverages", amount: 700 },
-  { text: "cleaning supplies", amount: 1100 },
-  { text: "beauty products", amount: 1300 },
-  { text: "clothing", amount: 2000 },
-  { text: "electronics", amount: 4500 },
-  { text: "books", amount: 600 },
-  { text: "fitness", amount: 1800 },
-  { text: "sports equipment", amount: 2500 },
-  { text: "auto maintenance", amount: 3000 },
-  { text: "furniture", amount: 5000 },
-  { text: "home decor", amount: 2200 },
-  { text: "pet supplies", amount: 900 },
-  { text: "entertainment", amount: 1500 },
-  { text: "subscriptions", amount: 800 },
-  { text: "software", amount: 1200 },
-  { text: "baby products", amount: 950 },
-  { text: "education", amount: 4000 },
-  { text: "healthcare", amount: 3200 },
-  { text: "insurance", amount: 2700 },
-  { text: "travel", amount: 6500 },
-  { text: "dining out", amount: 1900 },
-  { text: "investments", amount: 7000 },
-  { text: "taxes", amount: 6000 },
-  { text: "utilities", amount: 2500 },
-  { text: "charity", amount: 600 },
-  { text: "legal services", amount: 3500 },
-  { text: "consulting", amount: 2800 },
-  { text: "advertising", amount: 1700 },
-  { text: "marketing", amount: 2300 },
-  { text: "hobbies", amount: 1300 },
-  { text: "crafting", amount: 900 },
-  { text: "security", amount: 1400 },
-  { text: "web hosting", amount: 1600 },
-  { text: "cloud storage", amount: 1200 },
-  { text: "gardening", amount: 800 },
-  { text: "tools", amount: 1100 },
-  { text: "party supplies", amount: 700 },
-  { text: "repair services", amount: 2900 },
-  { text: "gaming", amount: 1800 },
-  { text: "photography", amount: 1400 },
-  { text: "music", amount: 1200 },
-  { text: "decor", amount: 1000 },
-  { text: "school supplies", amount: 600 },
-]);
+const history = ref<History[]>([]);
 
 const paginatedHistory = computed(() => {
   return history.value.slice((pagination.value - 1) * 5, pagination.value * 5);
@@ -71,18 +21,16 @@ function submit() {
     history.value.push({ text: text.value.trimStart(), amount: amount.value });
     income.value = history.value
       .filter((item: History) => item.amount >= 0)
-      .reduce((sum: number, item: History) => sum + item.amount, 0);
+      .reduce((sum: number, item: History) => sum + Number(item.amount), 0);
 
     expense.value = history.value
       .filter((item: History) => item.amount < 0)
-      .reduce((sum: number, item: History) => sum + item.amount, 0);
+      .reduce((sum: number, item: History) => sum + Number(item.amount), 0);
   }
   text.value = "";
   amount.value = null;
 }
 watch([text, amount], ([newText, newAmount]: [string, number | null]) => {
-  console.log(newAmount);
-
   let point = 0;
   if (newText !== "") {
     point++;
@@ -178,10 +126,6 @@ watch([text, amount], ([newText, newAmount]: [string, number | null]) => {
             label="Enter amount..."
             color="white"
             input-class="text-white"
-            @update:model-value="
-              amount = $event ? parseFloat($event) || null : null
-            "
-            @change="submit"
           />
         </div>
       </div>

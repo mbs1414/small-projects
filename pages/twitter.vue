@@ -32,7 +32,13 @@
       <div class="flex justify-between mx-3">
         <div class="text-gray-400 font-serif">{{ 150 - text.length }}</div>
         <div class="my-3">
-          <q-btn color="accent" label="SUBMIT" rounded @click="submit" />
+          <q-btn
+            color="accent"
+            label="SUBMIT"
+            rounded
+            @click="submit"
+            :disable="!(/^.*#.{3,}$/.test(text) && text.length >= 5)"
+          />
         </div>
       </div>
       <div class="bg-gray-700 h-60 rounded-b-md">
@@ -41,20 +47,34 @@
           v-for="(item, index) in commentList"
           :key="index"
         >
-          <div class="w-[10%] flex flex-col justify-center items-center text-indigo-300">
-            <font-awesome icon="sort-up" class="text-lg" />
-            <div class="leading-1">555</div>
+          <div
+            class="w-[10%] flex flex-col justify-center items-center text-indigo-300"
+          >
+            <font-awesome
+              icon="sort-up"
+              class="text-lg hover:text-indigo-500 cursor-pointer transition-transform hover:-translate-y-1"
+              @click="
+                hasVoted
+                  ? (item.vote--, (hasVoted = false))
+                  : (item.vote++, (hasVoted = true))
+              "
+            />
+            <div class="leading-1">{{ item.vote }}</div>
           </div>
           <div
             class="flex justify-center items-center text-2xl h-12 w-12 bg-amber-700 rounded-md font-bold"
           >
-            {{ item.label.match(/#(\w+)/)[1].split("")[0].toUpperCase() }}
+            {{ item.label.match(/#(\w+)/)?.[1].split("")[0].toUpperCase() }}
           </div>
           <div class="flex items-start flex-col w-[70%] px-1">
-            <div class="font-serif font-bold tracking-wider text-indigo-300 text-xs">
-              {{ item.label.match(/#(\w+)/)[1] }}
+            <div
+              class="font-serif font-bold tracking-wider text-indigo-300 text-xs"
+            >
+              {{ item.label.match(/#(\w+)/)?.[1] }}
             </div>
-            <div class="tracking-wider -mt-1 w-72 line-clamp-2 text-xs">{{ item.label }}</div>
+            <div class="tracking-wider -mt-1 w-72 line-clamp-2 text-xs">
+              {{ item.label }}
+            </div>
           </div>
           <div class="w[10%] flex items-center text-indigo-300">5d</div>
         </div>
@@ -64,14 +84,16 @@
 </template>
 <script lang="ts" setup>
 const text = ref<string>("");
-const commentList = ref<{ label: string }[]>([]);
+const commentList = ref<{ label: string; vote : number }[]>([]);
+const hasVoted = ref(false);
 function submit() {
+
   if (text.value !== "") {
-    commentList.value.push({ label: text.value });
-    text.value = ""
+    commentList.value.push({ label: text.value, vote:0 });
+    text.value = "";
   }
 }
 onMounted(() => {
-  commentList.value.push({ label: "sice everyday #netflix" });
+  commentList.value.push({ label: "sice everyday #netflix", vote: 10 });
 });
 </script>
