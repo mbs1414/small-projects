@@ -1,8 +1,15 @@
 import tailwindcss from "@tailwindcss/vite";
-// https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
+  ssr: false,
+
+  app: {
+    baseURL: '/small-projects/',
+  },
+
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
+
   css: ["~/assets/css/main.css"],
 
   vite: {
@@ -10,11 +17,12 @@ export default defineNuxtConfig({
   },
 
   modules: ["nuxt-quasar-ui", "@vesp/nuxt-fontawesome"],
+
   fontawesome: {
     icons: {
       solid: ['sort-up'],
-      regular: ['comment' ],
-      brands: ['twitter' ],
+      regular: ['comment'],
+      brands: ['twitter'],
     },
     proIcons: {
       solid: [],
@@ -24,10 +32,10 @@ export default defineNuxtConfig({
       duotone: [],
     },
     sharpIcons: {
-      solid: [], 
+      solid: [],
       regular: [],
       light: [],
       thin: [],
-    }
-  }
+    },
+  },
 });
