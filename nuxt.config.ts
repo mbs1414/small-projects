@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   ssr: false,
 
   app: {
-    baseURL: '/small-projects/',
+    baseURL: "/small-projects/",
   },
 
   compatibilityDate: "2024-11-01",
@@ -20,9 +20,9 @@ export default defineNuxtConfig({
 
   fontawesome: {
     icons: {
-      solid: ['sort-up'],
-      regular: ['comment'],
-      brands: ['twitter'],
+      solid: ["sort-up"],
+      regular: ["comment"],
+      brands: ["twitter"],
     },
     proIcons: {
       solid: [],
